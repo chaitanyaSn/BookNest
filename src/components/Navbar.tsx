@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { BookOpen, LogIn, MessageCircle, PlusCircle, Menu, BirdIcon } from 'lucide-react';
+import { BookOpen, LogIn, MessageCircle, PlusCircle, Menu, Clock } from 'lucide-react';
 import { Modal } from './Modal';
 import { SellBookForm } from './SellBookForm';
+import { RecentlyViewedBooks } from './RecentlyViewedBooks';
 
 interface NavbarProps {
   onMenuClick: () => void;
@@ -9,6 +10,7 @@ interface NavbarProps {
 
 export function Navbar({ onMenuClick }: NavbarProps) {
   const [isSellModalOpen, setIsSellModalOpen] = useState(false);
+  const [showRecentlyViewed, setShowRecentlyViewed] = useState(false);
 
   return (
     <>
@@ -21,11 +23,19 @@ export function Navbar({ onMenuClick }: NavbarProps) {
             >
               <Menu className="w-5 h-5" />
             </button>
-            <BirdIcon className="w-8 h-8 text-blue-600" />
-            <span className="text-xl font-bold">BookNest</span>
+            <BookOpen className="w-8 h-8 text-blue-600" />
+            <span className="text-xl font-bold">BookMarket</span>
           </div>
           
           <div className="flex items-center gap-4">
+            <button
+              onClick={() => setShowRecentlyViewed(!showRecentlyViewed)}
+              className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 rounded-full relative"
+            >
+              <Clock className="w-5 h-5" />
+              <span className="hidden sm:inline">Recent</span>
+            </button>
+
             <button
               onClick={() => setIsSellModalOpen(true)}
               className="flex items-center gap-2 px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-full"
@@ -45,6 +55,7 @@ export function Navbar({ onMenuClick }: NavbarProps) {
             </button>
           </div>
         </div>
+        {showRecentlyViewed && <RecentlyViewedBooks />}
       </nav>
 
       <Modal

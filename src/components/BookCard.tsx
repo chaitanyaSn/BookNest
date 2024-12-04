@@ -16,7 +16,11 @@ export function BookCard({ id,title, author, price, imageUrl, condition, descrip
           alt={title}
           className="w-full h-full object-cover"
         />
-        <button className="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-100">
+        <button className="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-100"
+        onClick={(e) => {
+          e.stopPropagation();
+          // Handle wishlist logic here
+        }}>
           <Heart className="w-5 h-5" />
         </button>
       </div>

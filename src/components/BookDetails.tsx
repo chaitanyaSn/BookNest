@@ -1,12 +1,14 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, MessageCircle, Heart } from 'lucide-react';
-import { books } from '../data/books';
+
+import { useRecentlyViewedBook } from '../hooks/useRecentlyViewedBook';
+import { useBook } from '../hooks/useBook';
 
 export function BookDetails() {
-  const { id } = useParams();
   const navigate = useNavigate();
-  const book = books.find(b => b.id === Number(id));
+  const { book } = useBook();
+  useRecentlyViewedBook(book);
 
   if (!book) {
     return (
